@@ -8,7 +8,17 @@ config_file = '.ya_token'
 
 access_token = os.getenv('YANDEX_TRANSLATE_API_TOKEN')
 if not access_token or len(access_token) == 0:
-	f = open(config_file, 'r')
+	try:
+		f = open(config_file, 'r')
+	except FileNotFoundError:
+		home = os.path.expanduser("~")
+		f = open(
+			os.path.join(
+				home,
+				config_file
+			),
+			'r'
+		)
 	access_token = f.readline().strip()
 detect_language_url = 'https://translate.yandex.net/api/v1.5/tr.json/detect?key={}'.format(
 	access_token
