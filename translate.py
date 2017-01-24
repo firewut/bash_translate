@@ -27,7 +27,7 @@ translate_url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key={}'
 	access_token
 )
 to_lang = sys.argv[1]
-text = sys.argv[2]
+text = ' '.join(sys.argv[2:])
 detected_response = requests.get(detect_language_url+'&text='+text)
 detected_lang = detected_response.json()['lang']
 	
